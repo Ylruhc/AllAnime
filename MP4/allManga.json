@@ -7,7 +7,7 @@
     },
     "version": "1.0.0",
     "language": "English (SUB)",
-    "streamType": "HLS",
+    "streamType": "MP4",
     "quality": "720p",
     "baseUrl": "https://mp4upload.com/" ,
     "searchBaseUrl": "https://allanime.to/" ,
