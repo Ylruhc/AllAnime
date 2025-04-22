@@ -8,30 +8,7 @@ const DEFAULT_HEADERS =  {
   "Referer": `${baseUrl}/`
 };
 // GRAPHQL QUERIES
-const SEARCH_QUERY = `
-      query(
-        $search: SearchInput,
-        $limit: Int,
-        $countryOrigin: VaildCountryOriginEnumType,
-        $page: Int
-      ) {
-        shows(
-          search: $search,
-          limit: $limit,
-          countryOrigin: $countryOrigin,
-          page: $page
-        ) {
-          edges {
-            _id
-            name
-            nativeName
-            englishName
-            thumbnail
-            slugTime
-          }
-        }
-      }
-    `;
+const SEARCH_QUERY = `query($search: SearchInput,$limit: Int,$countryOrigin: VaildCountryOriginEnumType,$page: Int) {shows(search: $search,limit: $limit,countryOrigin: $countryOrigin,page: $page){edges{_id name nativeName englishName thumbnail slugTime } } } `;
 const DETAIL_EPISODE_QUERY = `
       query($id: String!) {
         show(_id: $id) {
