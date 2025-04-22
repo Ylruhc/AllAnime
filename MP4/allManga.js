@@ -76,7 +76,7 @@ async function searchResults(keyword) {
       page: 1
     };
 
-    const response = await fetchv2(`${apiUrl}`, DEFAULT_HEADERS, "POST",JSON.stringify({ query:SEARCH_QUERY,variables: variable }))
+    const response = await fetchv2(`${apiUrl}`, DEFAULT_HEADERS, "POST",({ query:SEARCH_QUERY,variables: variable }))
         const data = await response.json();
         const resList = data.data.shows.edges    
         const transformedResults = resList.map(anime => ({
@@ -98,7 +98,7 @@ async function extractDetails(id) {
 
 
     const variable = {id:id}
-    const response = await fetchv2(`${apiUrl}`, DEFAULT_HEADERS, "POST",JSON.stringify({ query:DETAIL_EPISODE_QUERY,variables: variable }))
+    const response = await fetchv2(`${apiUrl}`, DEFAULT_HEADERS, "POST",({ query:DETAIL_EPISODE_QUERY,variables: variable }))
         const data = await response.json();
         const anime = data.data.show
         const transformedResults = {
@@ -123,7 +123,7 @@ async function extractEpisodes(id) {
 
 
     const variable = {id:id}
-    const response = await fetchv2(`${apiUrl}`, DEFAULT_HEADERS, "POST",JSON.stringify({ query:DETAIL_EPISODE_QUERY,variables: variable }))
+    const response = await fetchv2(`${apiUrl}`, DEFAULT_HEADERS, "POST",({ query:DETAIL_EPISODE_QUERY,variables: variable }))
         const data = await response.json();
         const anime = data.data.show
         console.log(anime)
@@ -142,7 +142,7 @@ async function extractEpisodes(id) {
 async function extractStreamUrl(url) {
     try {
         const variable = JSON.parse(url)
-        const response = await fetchv2(`${apiUrl}`, DEFAULT_HEADERS, "POST",JSON.stringify({ query:STREAM_QUERY,variables: variable }))
+        const response = await fetchv2(`${apiUrl}`, DEFAULT_HEADERS, "POST",({ query:STREAM_QUERY,variables: variable }))
 
         const data = await response.json();
        const mp4Val = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Mp4")
@@ -232,3 +232,4 @@ function extractScriptTags(html) {
 
   return scripts;
 }
+
