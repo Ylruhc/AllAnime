@@ -76,7 +76,7 @@ async function searchResults(keyword) {
       page: 1
     };
 
-    const response = await fetchv2(`${apiUrl}`, DEFAULT_HEADERS, "POST",({ query:SEARCH_QUERY,variables: variable }))
+    const response = await fetchv2(`${apiUrl}`, DEFAULT_HEADERS, "POST",{ query:SEARCH_QUERY,variables: variable })
         const data = await response.json();
         const resList = data.data.shows.edges    
         const transformedResults = resList.map(anime => ({
