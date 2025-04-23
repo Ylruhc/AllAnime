@@ -222,3 +222,42 @@ async function defaultExtractor(url) {
     return data.links[0].link
   
   }
+// MP4 EXTRACTOR
+async function mp4Extractor(url) {
+  const Referer = "https://mp4upload.com"
+  const headers = {"Referer":Referer}
+  const response = await fetchv2(url,headers)
+  const htmlText = await response.text()
+  const streamUrl = extractMp4Script(htmlText)
+  return streamUrl
+}
+function extractMp4Script(htmlText)
+{
+  const scripts = extractScriptTags(htmlText);
+  let scriptContent = null;
+
+
+  scriptContent = scripts.find(script =>
+      script.includes('eval')
+  );
+
+  scriptContent = scripts.find(script => script.includes('player.src'));
+
+  return scriptContent
+  .split(".src(")[1]
+  .split(")")[0]
+  .split("src:")[1]
+  .split('"')[1] || '';
+}
+// Extract all <script>...</script> blocks
+function extractScriptTags(html) {
+  const scriptRegex = /<script[^>]*>([\s\S]*?)<\/script>/gi;
+  const scripts = [];
+  let match;
+
+  while ((match = scriptRegex.exec(html)) !== null) {
+      scripts.push(match[1].trim());
+  }
+
+  return scripts;
+}
