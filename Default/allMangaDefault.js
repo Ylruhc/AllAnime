@@ -144,6 +144,7 @@ async function extractStreamUrl(url) {
         const defaultVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Default")
       const mp4Val = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Mp4")
        var streams = []
+      try{
        if(mp4Val.length > 0)
         {
           console.error(mp4Val[0])
@@ -153,6 +154,12 @@ async function extractStreamUrl(url) {
             streams.push("MP4",streamUrl)
           }
         }
+      }
+      catch
+      {
+        console.error("mp4 fetch error")
+      }
+      try{
         if(defaultVal.length > 0)
          {
            console.error(defaultVal[0])
@@ -162,7 +169,11 @@ async function extractStreamUrl(url) {
  
            streams.push("Default",streamUrl)
            
-         }
+         }}
+      catch
+      {
+        console.error("default fetch error")
+      }
         console.error(streams)
         return JSON.stringify({streams})
     } catch (error) {
