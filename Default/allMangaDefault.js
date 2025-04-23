@@ -142,6 +142,7 @@ async function extractStreamUrl(url) {
 
         const data = await response.json();
         const defaultVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Default")
+      const mp4Val = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Mp4")
        var streams = []
        if(mp4Val.length > 0)
         {
