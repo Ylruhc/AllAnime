@@ -144,10 +144,9 @@ async function extractStreamUrl(url) {
         const defaultVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Default")
       const mp4Val = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Mp4")
        var streams = []
-      console.error(mp4Val)
-      console.error(defaultVal)
        if(mp4Val.length > 0)
         {
+          console.error(mp4Val[0])
           const streamUrl = await mp4Extractor(mp4Val[0].sourceUrl)
           if(streamUrl != "")
           {
@@ -156,7 +155,9 @@ async function extractStreamUrl(url) {
         }
         if(defaultVal.length > 0)
          {
+           console.error(defaultVal[0])
            const decrpytedUrl = decryptSource(defaultVal[0].sourceUrl)
+           
            const streamUrl = await defaultExtractor(decrpytedUrl.replace("/clock?", "/clock.json?"))
  
            streams.push("Default",streamUrl)
