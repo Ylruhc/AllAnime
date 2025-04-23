@@ -162,6 +162,7 @@ async function extractStreamUrl(url) {
            streams.push("Default",streamUrl)
            
          }
+        console.error(streams)
         return JSON.stringify({streams})
     } catch (error) {
        console.log('Fetch error:', error);
