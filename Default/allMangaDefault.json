@@ -1,0 +1,17 @@
+{
+    "sourceName": "AllAnime",
+    "iconUrl": "https://raw.githubusercontent.com/Kohi-den/extensions-source/refs/heads/main/src/en/allanime/res/mipmap-xxxhdpi/ic_launcher.png",
+    "author": {
+        "name": "Churly",
+        "icon": "https://i.pinimg.com/236x/90/2c/ea/902ceaa5610ef7f8f81c2f3881799f2c.jpg"
+    },
+    "version": "1.0.0",
+    "language": "English (SUB)",
+    "streamType": "HLS",
+    "quality": "720p",
+    "baseUrl": "https://mp4upload.com/" ,
+    "searchBaseUrl": "https://allanime.to" ,
+    "scriptUrl": "https://raw.githubusercontent.com/Ylruhc/AllAnime/refs/heads/main/Default/allMangaDefault.js",
+    "asyncJS": true,
+    "streamAsyncJS": true
+ }
