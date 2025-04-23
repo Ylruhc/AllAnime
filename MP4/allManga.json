@@ -10,7 +10,7 @@
     "streamType": "MP4",
     "quality": "720p",
     "baseUrl": "https://mp4upload.com/" ,
-    "searchBaseUrl": "https://allanime.to/" ,
+    "searchBaseUrl": "" ,
     "scriptUrl": "https://raw.githubusercontent.com/Ylruhc/AllAnime/refs/heads/main/MP4/allManga.js",
     "asyncJS": true,
     "streamAsyncJS": true
