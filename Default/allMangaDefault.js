@@ -142,15 +142,23 @@ async function extractStreamUrl(url) {
 
         const data = await response.json();
         const defaultVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Default")
-        if(defaultVal)
+        const YtVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Yt-mp4")
+       var streams = []
+       if(YtVal.length > 0)
+        {
+          const decrpytedUrl = decryptSource(YtVal[0].sourceUrl)
+          streams.push(("Yt mp4",decrpytedUrl))
+  
+        }
+        if(defaultVal.length > 0)
          {
            const decrpytedUrl = decryptSource(defaultVal[0].sourceUrl)
            const streamUrl = await defaultExtractor(decrpytedUrl.replace("/clock?", "/clock.json?"))
  
-           return streamUrl
+           streams.push("Default",streamUrl)
            
          }
-        return null
+        return JSON.stringify({streams})
     } catch (error) {
        console.log('Fetch error:', error);
        return null;
