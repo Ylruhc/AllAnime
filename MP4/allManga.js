@@ -1,11 +1,7 @@
 const apiUrl = "https://api.allanime.day/api"
 const baseUrl = "https://allanime.to"
 const DEFAULT_HEADERS =  {
-  "Accept": "*/*",
   "Content-Type": "application/json; charset=utf-8",
-  "Host": baseUrl,
-  "Origin": baseUrl,
-  "Referer": `${baseUrl}/`
 };
 // GRAPHQL QUERIES
 const SEARCH_QUERY = `
