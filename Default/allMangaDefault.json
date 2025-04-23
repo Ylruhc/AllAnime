@@ -9,7 +9,7 @@
     "language": "English (SUB)",
     "streamType": "HLS",
     "quality": "720p",
-    "baseUrl": "https://mp4upload.com/" ,
+    "baseUrl": "https://allanime.to" ,
     "searchBaseUrl": "https://allanime.to" ,
     "scriptUrl": "https://raw.githubusercontent.com/Ylruhc/AllAnime/refs/heads/main/Default/allMangaDefault.js",
     "asyncJS": true,
