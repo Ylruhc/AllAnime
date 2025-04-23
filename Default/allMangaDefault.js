@@ -158,6 +158,18 @@ async function extractStreamUrl(url) {
 }
 
 //util functions
+// decrpyt sourceUrl
+function decryptSource(str) {
+  if (str.startsWith("-")) {
+      return str.substring(str.lastIndexOf('-') + 1)
+          .match(/.{1,2}/g)
+          .map(hex => parseInt(hex, 16))
+          .map(byte => String.fromCharCode(byte ^ 56))
+          .join("");
+  } else {
+      return str;
+  }
+}
 function htmlToText(htmlText)
 {
     let text = htmlText.replace(/<br\s*\/?>/gi, '\n');
