@@ -142,13 +142,14 @@ async function extractStreamUrl(url) {
 
         const data = await response.json();
         const defaultVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Default")
-        const YtVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Yt-mp4")
        var streams = []
-       if(YtVal.length > 0)
+       if(mp4Val.length > 0)
         {
-          const decrpytedUrl = decryptSource(YtVal[0].sourceUrl)
-          streams.push(("Yt mp4",decrpytedUrl))
-  
+          const streamUrl = await mp4Extractor(mp4Val[0].sourceUrl)
+          if(streamUrl != "")
+          {
+            streams.push("MP4",streamUrl)
+          }
         }
         if(defaultVal.length > 0)
          {
