@@ -125,10 +125,10 @@ async function extractEpisodes(id) {
         console.log(anime)
         const transformedResults = anime.availableEpisodesDetail.sub.map((episode,idx) => ({
             href: JSON.stringify({showId:id,translationType:"sub",episodeString:episode}),
-            number: parseInt(episode, 10) || 1
+            number: parseFloat(episode) || 1
         }));
         
-        return JSON.stringify(transformedResults);
+        return JSON.stringify(transformedResults.reverse());
         
     } catch (error) {
         console.log('Fetch error:', error);
