@@ -144,6 +144,8 @@ async function extractStreamUrl(url) {
         const defaultVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Default")
       const mp4Val = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Mp4")
        var streams = []
+      console.error(mp4Val)
+      console.error(defaultVal)
        if(mp4Val.length > 0)
         {
           const streamUrl = await mp4Extractor(mp4Val[0].sourceUrl)
