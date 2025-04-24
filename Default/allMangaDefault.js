@@ -98,12 +98,12 @@ async function extractDetails(id) {
         const data = await response.json();
         const anime = data.data.show
         const transformedResults = {
-            description: htmlToText(anime.description).replace(/\n/g, '')|| 'No description available',
+            description: htmlToText(anime.description).replace(/\n/g, '').replace(/\s+/g, " ")|| 'No description available',
             aliases: `Duration: ${'Unknown'}`,
             airdate: `Aired: ${anime.season.year || 'Unknown'}`
         };
         
-        return JSON.stringify(transformedResults);
+        return JSON.stringify([transformedResults]);
     } catch (error) {
         console.log('Details error:', error);
         return JSON.stringify([{
