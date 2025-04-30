@@ -151,7 +151,7 @@ async function extractStreamUrl(url) {
           const streamUrl = await mp4Extractor(mp4Val[0].sourceUrl)
           if(streamUrl != "")
           {
-            streams.push({title:"MP4",streamUrl:streamUrl,headers:{Referer:"https://mp4upload.com/",Origin"https://mp4upload.com/"}})
+            streams.push({title:"MP4",streamUrl:streamUrl,headers:{Referer:"https://mp4upload.com/",Origin:"https://mp4upload.com/"}})
           }
         }
       }
