@@ -151,7 +151,7 @@ async function extractStreamUrl(url) {
           const streamUrl = await mp4Extractor(mp4Val[0].sourceUrl)
           if(streamUrl != "")
           {
-            streams.push("MP4",streamUrl)
+            streams.push({title:"MP4",streamUrl:streamUrl,headers:{Referer:"https://mp4upload.com/",Origin"https://mp4upload.com/"}})
           }
         }
       }
@@ -167,7 +167,7 @@ async function extractStreamUrl(url) {
            
            const streamUrl = await defaultExtractor(decrpytedUrl.replace("/clock?", "/clock.json?"))
  
-           streams.push("Default",streamUrl)
+           streams.push({streamUrl:streamUrl,title:"Default"})
            
          }}
       catch
@@ -175,7 +175,7 @@ async function extractStreamUrl(url) {
         console.error("default fetch error")
       }
         console.error(streams)
-        return JSON.stringify({streams})
+        return JSON.stringify({streams:streams})
     } catch (error) {
        console.log('Fetch error:', error);
        return null;
