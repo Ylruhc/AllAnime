@@ -143,7 +143,17 @@ async function extractStreamUrl(url) {
         const data = await response.json();
         const defaultVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Default")
       const mp4Val = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Mp4")
+             const YtVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Yt-mp4")
        var streams = []
+      try
+      {
+        if(YtVal.length > 0)
+        {
+           const decrpytedUrl = decryptSource(YtVal[0].sourceUrl)
+          streams.push({title:"YT",streamUrl:decrpytedUrl,headers:{Referer:"https://allmanga.to",Host:"https://allmanga.to"}})
+        }
+      }
+      catch{console.error("Yt fetch error")}
       try{
        if(mp4Val.length > 0)
         {
