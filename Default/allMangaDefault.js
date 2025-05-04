@@ -144,7 +144,17 @@ async function extractStreamUrl(url) {
         const defaultVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Default")
       const mp4Val = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Mp4")
              const YtVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Yt-mp4")
+      const okVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Ok")
+      
        var streams = []
+      try 
+      {
+        if(okVal.length > 0)
+        {
+          const streamUrl = await okruExtractor(okVal[0].sourceUrl)
+          streams.push({title:"okru",streamUrl:streamUrl,headers:{}})
+        }
+      } catch{console.error("OK fetch error")}
       try
       {
         if(YtVal.length > 0)
@@ -249,6 +259,36 @@ async function defaultExtractor(url) {
     return data.links[0].link
   
   }
+// OKRU extractor
+async function okruExtractor(url) {
+  const response = await fetchv2(url)
+  const body = await response.text()
+  const match = body.match(/data-options="([^"]*)"/);
+  if(match)
+    {
+      const json = JSON.parse(match[1].replace(/&quot;/g, '"'))
+      try
+      {
+        const metaData = JSON.parse(json["flashvars"]["metadata"])
+        if(metaData['hlsManifestUrl'])
+          {
+            return metaData['hlsManifestUrl']
+          }
+        
+        return metaData["ondemandHls"]
+
+      }
+      catch
+      {
+        console.error("json parse error")
+      }
+
+    }
+
+
+
+  
+}
 // MP4 EXTRACTOR
 async function mp4Extractor(url) {
   const Referer = "https://mp4upload.com"
