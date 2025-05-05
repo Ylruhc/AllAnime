@@ -156,7 +156,7 @@ async function extractStreamUrl(url) {
           {
             console.error("okru url is")
             console.error(streamUrl)
-            streams.push({title:"okru",streamUrl:streamUrl.replace(/(srcAg\/)([^/]+)(\/urls)/, '$1UNKNOWN$3'),headers:{}})
+            streams.push({title:"okru",streamUrl:streamUrl,headers:{}})
           }
         }
       } catch{console.error("OK fetch error")}
