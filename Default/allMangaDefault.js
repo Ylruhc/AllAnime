@@ -221,10 +221,12 @@ async function extractStreamUrl(url) {
          {
            console.error(defaultVal[0])
            const decrpytedUrl = decryptSource(defaultVal[0].sourceUrl)
-           
            const streamUrl = await defaultExtractor(decrpytedUrl.replace("/clock?", "/clock.json?"))
- 
-           streams.push({streamUrl:streamUrl,title:"Default"})
+            if(streamUrl)
+           {
+             streams.push({streamUrl:streamUrl,title:"Default"})
+           }
+           
            
          }}
       catch
