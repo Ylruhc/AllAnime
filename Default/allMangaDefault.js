@@ -174,7 +174,7 @@ async function extractStreamUrl(url) {
           }
         }
       }
-      catch(e){console.error("streamwish fetch error")console.error(e.message)}
+      catch(e){console.error("streamwish fetch error");console.error(e.message)}
       try 
       {
         if(okVal.length > 0)
