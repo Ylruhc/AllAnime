@@ -258,6 +258,20 @@ function htmlToText(htmlText)
   return text;
 }
 // extract URL based on sources
+// streamWish extractor
+async function streamWishExtractor(url)
+{
+  const response = await fetch(url)
+  const text = await response.text()
+  const unpacked = unpack(text)
+  const m3u8Regex = /https?:\/\/[^\s]+master\.m3u8[^\s]*?(\?[^"]*)?/;
+  const match = unpacked.match(m3u8Regex);
+  if(match)
+    {
+      console.log(match[0])
+      return match[0]
+    }
+}
 // Default EXTRACTOR
 async function defaultExtractor(url) {
     var res = await fetchv2(`${baseUrl}/getVersion`)
