@@ -157,7 +157,8 @@ async function extractStreamUrl(url) {
           const streamUrl = await filemoonExtractor(fileMoonVal[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push({title:"FileMoon",streamUrl:streamUrl,headers:{}})
+            streams.push("FileMoon",streamUrl)
+            
           }
         
         }
@@ -170,7 +171,8 @@ async function extractStreamUrl(url) {
           const streamUrl = await streamWishExtractor(swVal[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push({title:"StreamWish",streamUrl:streamUrl,headers:{}})
+            streams.push("StreamWish",streamUrl)
+            
           }
         }
       }
@@ -182,20 +184,19 @@ async function extractStreamUrl(url) {
           const streamUrl = await okruExtractor(okVal[0].sourceUrl)
           if(streamUrl)
           {
-            console.error("okru url is")
-            console.error(streamUrl)
-            streams.push({title:"okru",streamUrl:streamUrl,headers:{}})
+            streams.push("okru",streamUrl)
+            
           }
         }
       } catch{console.error("OK fetch error")}
       try{
        if(mp4Val.length > 0)
         {
-          console.error(mp4Val[0])
           const streamUrl = await mp4Extractor(mp4Val[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push({title:"MP4",streamUrl:streamUrl,headers:{Referer:"https://mp4upload.com/",Origin:"https://mp4upload.com/"}})
+            streams.push("MP4",streamUrl)
+        
           }
         }
       }
@@ -206,12 +207,12 @@ async function extractStreamUrl(url) {
       try{
         if(defaultVal.length > 0)
          {
-           console.error(defaultVal[0])
            const decrpytedUrl = decryptSource(defaultVal[0].sourceUrl)
            const streamUrl = await defaultExtractor(decrpytedUrl.replace("/clock?", "/clock.json?"))
             if(streamUrl)
            {
-             streams.push({streamUrl:streamUrl,title:"Default"})
+             streams.push("Default",streamUrl)
+             
            }
            
            
