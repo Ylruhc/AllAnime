@@ -295,10 +295,18 @@ function extractIframeSrc(html) {
 }
 // filemoon extractor
 async function filemoonExtractor(streamUrl) {
+    const m3u8Regex = /https?:\/\/[^\s]+master\.m3u8[^\s]*?(\?[^"]*)?/;
   const response = await fetchv2(streamUrl)
   const text = await response.text()
   //console.log("filemoon text is")
   const script = extractFileMoonScript(text)
+  const firstAttempt = unpack(text)
+    const firstMatch = firstAttempt.match(m3u8Regex);
+  if(firstMatch)
+    {
+      console.log(firstMatch[0])
+      return firstMatch[0]
+    }
   if(script){return script}
   const newUrl = extractIframeSrc(text)
   const newResponse = await fetchv2(newUrl)
@@ -306,7 +314,7 @@ async function filemoonExtractor(streamUrl) {
   const newScript = extractFileMoonScript(newText)
   //console.log(newScript)
   const newStreamUrl = unpack(newScript);
-  const m3u8Regex = /https?:\/\/[^\s]+master\.m3u8[^\s]*?(\?[^"]*)?/;
+
   const match = newStreamUrl.match(m3u8Regex);
   if(match)
     {
