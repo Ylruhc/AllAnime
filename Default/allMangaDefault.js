@@ -154,7 +154,7 @@ async function extractStreamUrl(url) {
           const streamUrl = await okruExtractor(okVal[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push({title:"okru",streamUrl.replace("CHROME_MAC","UNKNOWN"):streamUrl,headers:{}})
+            streams.push({title:"okru",streamUrl:streamUrl.replace("CHROME_MAC","UNKNOWN"),headers:{}})
           }
         }
       } catch{console.error("OK fetch error")}
