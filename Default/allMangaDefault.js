@@ -305,7 +305,6 @@ function extractIframeSrc(html) {
 }
 // filemoon extractor
 async function filemoonExtractor(streamUrl) {
-  const url = new URL(streamUrl)
   const response = await fetchv2(streamUrl)
   const text = await response.text()
   //console.log("filemoon text is")
