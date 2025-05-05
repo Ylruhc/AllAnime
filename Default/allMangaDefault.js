@@ -313,7 +313,7 @@ async function filemoonExtractor(streamUrl) {
   const script = extractFileMoonScript(text)
   if(script){return script}
   const newUrl = extractIframeSrc(text)
-  const newResponse = await fetch(newUrl)
+  const newResponse = await fetchv2(newUrl)
   const newText = await newResponse.text()
   const newScript = extractFileMoonScript(newText)
   //console.log(newScript)
