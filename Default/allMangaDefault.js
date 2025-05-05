@@ -157,8 +157,7 @@ async function extractStreamUrl(url) {
           const streamUrl = await filemoonExtractor(fileMoonVal[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push("FileMoon",streamUrl)
-            
+            streams.push({title:"FileMoon",streamUrl:streamUrl,headers:{}})
           }
         
         }
@@ -171,8 +170,7 @@ async function extractStreamUrl(url) {
           const streamUrl = await streamWishExtractor(swVal[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push("StreamWish",streamUrl)
-            
+            streams.push({title:"StreamWish",streamUrl:streamUrl,headers:{}})
           }
         }
       }
@@ -184,19 +182,20 @@ async function extractStreamUrl(url) {
           const streamUrl = await okruExtractor(okVal[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push("okru",streamUrl)
-            
+            console.error("okru url is")
+            console.error(streamUrl)
+            streams.push({title:"okru",streamUrl:streamUrl,headers:{}})
           }
         }
       } catch{console.error("OK fetch error")}
       try{
        if(mp4Val.length > 0)
         {
+          console.error(mp4Val[0])
           const streamUrl = await mp4Extractor(mp4Val[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push("MP4",streamUrl)
-        
+            streams.push({title:"MP4",streamUrl:streamUrl,headers:{Referer:"https://mp4upload.com/",Origin:"https://mp4upload.com/"}})
           }
         }
       }
@@ -207,12 +206,12 @@ async function extractStreamUrl(url) {
       try{
         if(defaultVal.length > 0)
          {
+           console.error(defaultVal[0])
            const decrpytedUrl = decryptSource(defaultVal[0].sourceUrl)
            const streamUrl = await defaultExtractor(decrpytedUrl.replace("/clock?", "/clock.json?"))
             if(streamUrl)
            {
-             streams.push("Default",streamUrl)
-             
+             streams.push({streamUrl:streamUrl,title:"Default"})
            }
            
            
@@ -295,18 +294,10 @@ function extractIframeSrc(html) {
 }
 // filemoon extractor
 async function filemoonExtractor(streamUrl) {
-    const m3u8Regex = /https?:\/\/[^\s]+master\.m3u8[^\s]*?(\?[^"]*)?/;
   const response = await fetchv2(streamUrl)
   const text = await response.text()
   //console.log("filemoon text is")
   const script = extractFileMoonScript(text)
-  const firstAttempt = unpack(script)
-    const firstMatch = firstAttempt.match(m3u8Regex);
-  if(firstMatch)
-    {
-      console.log(firstMatch[0])
-      return firstMatch[0]
-    }
   if(script){return script}
   const newUrl = extractIframeSrc(text)
   const newResponse = await fetchv2(newUrl)
@@ -314,7 +305,7 @@ async function filemoonExtractor(streamUrl) {
   const newScript = extractFileMoonScript(newText)
   //console.log(newScript)
   const newStreamUrl = unpack(newScript);
-
+  const m3u8Regex = /https?:\/\/[^\s]+master\.m3u8[^\s]*?(\?[^"]*)?/;
   const match = newStreamUrl.match(m3u8Regex);
   if(match)
     {
