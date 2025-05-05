@@ -146,7 +146,20 @@ async function extractStreamUrl(url) {
              const YtVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Yt-mp4")
       const okVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Ok")
       const swVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Sw")
+      const fileMoonVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Fm-Hls")
        var streams = []
+      try{
+        if(fileMoonVal.length > 0)
+        {
+          const streamUrl = await filemoonExtractor(fileMoonVal[0].sourceUrl)
+          if(streamUrl)
+          {
+            streams.push({title:"FileMoon",streamUrl:streamUrl,headers:{}})
+          }
+        
+        }
+      }
+      catch{console.error("fileMoon fetch error")}
       try
       {
         if(swVal.length > 0)
@@ -270,6 +283,46 @@ function htmlToText(htmlText)
   return text;
 }
 // extract URL based on sources
+
+function extractFileMoonScript(html) {
+  const scriptRegex = /<script[^>]*>([\s\S]*?)<\/script>/gi;
+  let match;
+  while ((match = scriptRegex.exec(html)) !== null) {
+    const content = match[1];
+    if (content.includes('eval') && content.includes('m3u8')) {
+      return content;
+    }
+  }
+  return null;
+}
+function extractIframeSrc(html) {
+  const iframeRegex = /<iframe[^>]+src=["']([^"']+)["']/i;
+  const match = html.match(iframeRegex);
+  return match ? match[1] : null;
+}
+// filemoon extractor
+async function filemoonExtractor(streamUrl) {
+  const url = new URL(streamUrl)
+  const response = await fetch(streamUrl)
+  const text = await response.text()
+  //console.log("filemoon text is")
+  const script = extractFileMoonScript(text)
+  if(script){return script}
+  const newUrl = extractIframeSrc(text)
+  const newResponse = await fetch(newUrl)
+  const newText = await newResponse.text()
+  const newScript = extractFileMoonScript(newText)
+  //console.log(newScript)
+  const newStreamUrl = unpack(newScript);
+  const m3u8Regex = /https?:\/\/[^\s]+master\.m3u8[^\s]*?(\?[^"]*)?/;
+  const match = newStreamUrl.match(m3u8Regex);
+  if(match)
+    {
+      console.log(match[0])
+      return match[0]
+    }
+
+}
 // streamWish extractor
 async function streamWishExtractor(url)
 {
