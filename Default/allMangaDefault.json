@@ -6,6 +6,7 @@
         "icon": "https://i.pinimg.com/236x/90/2c/ea/902ceaa5610ef7f8f81c2f3881799f2c.jpg"
     },
     "version": "1.0.0",
+    "type" : "anime",
     "language": "English (SUB)",
     "streamType": "HLS",
     "quality": "720p",
