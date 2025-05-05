@@ -162,7 +162,7 @@ async function extractStreamUrl(url) {
         
         }
       }
-      catch{console.error("fileMoon fetch error")}
+      catch(e){console.error("fileMoon fetch error"); console.error(e.message)}
       try
       {
         if(swVal.length > 0)
@@ -174,7 +174,7 @@ async function extractStreamUrl(url) {
           }
         }
       }
-      catch{console.error("streamwish fetch error")}
+      catch(e){console.error("streamwish fetch error")console.error(e.message)}
       try 
       {
         if(okVal.length > 0)
@@ -306,7 +306,7 @@ function extractIframeSrc(html) {
 // filemoon extractor
 async function filemoonExtractor(streamUrl) {
   const url = new URL(streamUrl)
-  const response = await fetch(streamUrl)
+  const response = await fetchv2(streamUrl)
   const text = await response.text()
   //console.log("filemoon text is")
   const script = extractFileMoonScript(text)
@@ -329,7 +329,7 @@ async function filemoonExtractor(streamUrl) {
 // streamWish extractor
 async function streamWishExtractor(url)
 {
-  const response = await fetch(url)
+  const response = await fetchv2(url)
   const text = await response.text()
   const unpacked = unpack(text)
   const m3u8Regex = /https?:\/\/[^\s]+master\.m3u8[^\s]*?(\?[^"]*)?/;
