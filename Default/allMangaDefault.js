@@ -188,19 +188,6 @@ async function extractStreamUrl(url) {
           }
         }
       } catch{console.error("OK fetch error")}
-      try
-      {
-        if(YtVal.length > 0)
-        {
-           const decrpytedUrl = decryptSource(YtVal[0].sourceUrl)
-          if(decrpytedUrl)
-          {
-             streams.push({title:"YT",streamUrl:decrpytedUrl,headers:{Referer:"https://allmanga.to",Host:"https://allmanga.to"}})
-          }
-
-        }
-      }
-      catch{console.error("Yt fetch error")}
       try{
        if(mp4Val.length > 0)
         {
