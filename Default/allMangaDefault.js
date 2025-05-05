@@ -157,9 +157,7 @@ async function extractStreamUrl(url) {
           const streamUrl = await filemoonExtractor(fileMoonVal[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push("FileMoon")
-            streams.push(streamUrl)
-            //streams.push({title:"FileMoon",streamUrl:streamUrl,headers:{}})
+            streams.push({title:"FileMoon",streamUrl:streamUrl,headers:{}})
           }
         
         }
@@ -172,9 +170,7 @@ async function extractStreamUrl(url) {
           const streamUrl = await streamWishExtractor(swVal[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push("StreamWish")
-            streams.push(streamUrl)
-            //streams.push({title:"StreamWish",streamUrl:streamUrl,headers:{}})
+            streams.push({title:"StreamWish",streamUrl:streamUrl,headers:{}})
           }
         }
       }
@@ -186,22 +182,20 @@ async function extractStreamUrl(url) {
           const streamUrl = await okruExtractor(okVal[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push("Okru")
-            streams.push(streamUrl)
-            //streams.push({title:"okru",streamUrl:streamUrl,headers:{}})
+            console.error("okru url is")
+            console.error(streamUrl)
+            streams.push({title:"okru",streamUrl:streamUrl,headers:{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"}})
           }
         }
       } catch{console.error("OK fetch error")}
       try{
        if(mp4Val.length > 0)
         {
-    
+          console.error(mp4Val[0])
           const streamUrl = await mp4Extractor(mp4Val[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push("MP4")
-            streams.push(streamUrl)
-            //streams.push({title:"MP4",streamUrl:streamUrl,headers:{Referer:"https://mp4upload.com/",Origin:"https://mp4upload.com/"}})
+            streams.push({title:"MP4",streamUrl:streamUrl,headers:{Referer:"https://mp4upload.com/",Origin:"https://mp4upload.com/"}})
           }
         }
       }
@@ -212,14 +206,12 @@ async function extractStreamUrl(url) {
       try{
         if(defaultVal.length > 0)
          {
-         
+           console.error(defaultVal[0])
            const decrpytedUrl = decryptSource(defaultVal[0].sourceUrl)
            const streamUrl = await defaultExtractor(decrpytedUrl.replace("/clock?", "/clock.json?"))
             if(streamUrl)
            {
-            streams.push("Default")
-            streams.push(streamUrl)
-             //streams.push({streamUrl:streamUrl,title:"Default"})
+             streams.push({streamUrl:streamUrl,title:"Default"})
            }
            
            
