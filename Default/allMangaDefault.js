@@ -145,8 +145,20 @@ async function extractStreamUrl(url) {
       const mp4Val = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Mp4")
              const YtVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Yt-mp4")
       const okVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Ok")
-      
+      const swVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Sw")
        var streams = []
+      try
+      {
+        if(swVal.length > 0)
+        {
+          const streamUrl = await streamWishExtractor(swVal[0].sourceUrl)
+          if(streamUrl)
+          {
+            streams.push({title:"StreamWish",streamUrl:streamUrl,headers:{}})
+          }
+        }
+      }
+      catch{console.error("streamwish fetch error")}
       try 
       {
         if(okVal.length > 0)
