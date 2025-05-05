@@ -147,6 +147,9 @@ async function extractStreamUrl(url) {
       const okVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Ok")
       const swVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Sw")
       const fileMoonVal = data.data.episode.sourceUrls.filter(x=> x.sourceName == "Fm-Hls")
+      console.error(okVal)
+      console.error(swVal)
+      console.error(fileMoonVal)
        var streams = []
       try{
         if(fileMoonVal.length > 0)
