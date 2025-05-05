@@ -152,7 +152,10 @@ async function extractStreamUrl(url) {
         if(okVal.length > 0)
         {
           const streamUrl = await okruExtractor(okVal[0].sourceUrl)
-          streams.push({title:"okru",streamUrl:streamUrl,headers:{}})
+          if(streamUrl)
+          {
+            streams.push({title:"okru",streamUrl:streamUrl,headers:{}})
+          }
         }
       } catch{console.error("OK fetch error")}
       try
@@ -160,7 +163,11 @@ async function extractStreamUrl(url) {
         if(YtVal.length > 0)
         {
            const decrpytedUrl = decryptSource(YtVal[0].sourceUrl)
-          streams.push({title:"YT",streamUrl:decrpytedUrl,headers:{Referer:"https://allmanga.to",Host:"https://allmanga.to"}})
+          if(decrpytedUrl)
+          {
+             streams.push({title:"YT",streamUrl:decrpytedUrl,headers:{Referer:"https://allmanga.to",Host:"https://allmanga.to"}})
+          }
+
         }
       }
       catch{console.error("Yt fetch error")}
@@ -169,7 +176,7 @@ async function extractStreamUrl(url) {
         {
           console.error(mp4Val[0])
           const streamUrl = await mp4Extractor(mp4Val[0].sourceUrl)
-          if(streamUrl != "")
+          if(streamUrl)
           {
             streams.push({title:"MP4",streamUrl:streamUrl,headers:{Referer:"https://mp4upload.com/",Origin:"https://mp4upload.com/"}})
           }
