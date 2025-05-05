@@ -300,7 +300,7 @@ async function filemoonExtractor(streamUrl) {
   const text = await response.text()
   //console.log("filemoon text is")
   const script = extractFileMoonScript(text)
-  const firstAttempt = unpack(text)
+  const firstAttempt = unpack(script)
     const firstMatch = firstAttempt.match(m3u8Regex);
   if(firstMatch)
     {
