@@ -157,9 +157,9 @@ async function extractStreamUrl(url) {
           const streamUrl = await filemoonExtractor(fileMoonVal[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push("FileMoon")
-            streams.push(streamUrl)
-            //streams.push({title:"FileMoon",streamUrl:streamUrl,headers:{}})
+            //streams.push("FileMoon")
+            //streams.push(streamUrl)
+            streams.push({title:"FileMoon",streamUrl:streamUrl,headers:{}})
           }
         
         }
@@ -172,9 +172,9 @@ async function extractStreamUrl(url) {
           const streamUrl = await streamWishExtractor(swVal[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push("StreamWish")
-            streams.push(streamUrl)
-            //streams.push({title:"StreamWish",streamUrl:streamUrl,headers:{}})
+            //streams.push("StreamWish")
+            //streams.push(streamUrl)
+            streams.push({title:"StreamWish",streamUrl:streamUrl,headers:{}})
           }
         }
       }
@@ -186,9 +186,9 @@ async function extractStreamUrl(url) {
           const streamUrl = await okruExtractor(okVal[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push("Okru")
-            streams.push(streamUrl)
-            //streams.push({title:"okru",streamUrl:streamUrl,headers:{}})
+            //streams.push("Okru")
+            //streams.push(streamUrl)
+            streams.push({title:"okru",streamUrl:streamUrl,headers:{}})
           }
         }
       } catch{console.error("OK fetch error")}
@@ -199,9 +199,9 @@ async function extractStreamUrl(url) {
           const streamUrl = await mp4Extractor(mp4Val[0].sourceUrl)
           if(streamUrl)
           {
-            streams.push("MP4")
-            streams.push(streamUrl)
-            //streams.push({title:"MP4",streamUrl:streamUrl,headers:{Referer:"https://mp4upload.com/",Origin:"https://mp4upload.com/"}})
+            //streams.push("MP4")
+            //streams.push(streamUrl)
+            streams.push({title:"MP4",streamUrl:streamUrl,headers:{Referer:"https://mp4upload.com/",Origin:"https://mp4upload.com/"}})
           }
         }
       }
@@ -217,9 +217,9 @@ async function extractStreamUrl(url) {
            const streamUrl = await defaultExtractor(decrpytedUrl.replace("/clock?", "/clock.json?"))
             if(streamUrl)
            {
-            streams.push("Default")
-            streams.push(streamUrl)
-             //streams.push({streamUrl:streamUrl,title:"Default"})
+            //streams.push("Default")
+            //streams.push(streamUrl)
+             streams.push({streamUrl:streamUrl,title:"Default"})
            }
            
            
